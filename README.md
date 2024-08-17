@@ -19,12 +19,11 @@ This is a fork of the original [Minetrack](https://minetrack.me) project. In thi
 ### Installation
 
 1. Ensure you have Node 12.4.0+ installed (`node -v` to check your version).
-2. Configure your proxy pool in `proxylist.json`.
-3. Adjust `config.json` as needed.
-4. Add or remove servers in `servers.json`.
-5. Run `npm install` to install dependencies.
-6. Run `npm run build` to bundle assets.
-7. Start the application with `node main.js` (may need sudo).
+2. Adjust `config.json` as needed.
+3. Add or remove servers in `servers.json`.
+4. Run `npm install` to install dependencies.
+5. Run `npm run build` to bundle assets.
+6. Start the application with `node main.js` (may need sudo).
 
 ### Docker
 
