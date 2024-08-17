@@ -2,93 +2,54 @@
 	<img width="120" height="120" src="assets/images/logo.svg">
 </p>
 
-# Minetrack
-Minetrack makes it easy to keep an eye on your favorite Minecraft servers. Simple and hackable, Minetrack easily runs on any hardware. Use it for monitoring, analytics, or just for fun. [Check it out](https://minetrack.me).
+# Minetrack Fork with Random Proxy Support
 
-### This project is not actively supported!
-This project is not actively supported. Pull requests will be reviewed and merged (if accepted), but issues _might_ not be addressed outside of fixes provided by community members. Please share any improvements or fixes you've made so everyone can benefit from them.
+This is a fork of the original [Minetrack](https://minetrack.me) project. In this version, server pings are conducted using random proxies, enhancing privacy and helping to bypass rate limits.
 
 ### Features
-- 🚀 Real time Minecraft server player count tracking with customizable update speed.
-- 📝 Historical player count logging with 24 hour peak and player count record tracking.
+
+- 🌐 **Random Proxy Support**: Automatically pings Minecraft servers using a pool of random proxies.
+- 🚀 Real-time player count tracking with customizable update speed.
+- 📝 Historical player count logging with 24-hour peak and record tracking.
 - 📈 Historical graph with customizable time frame.
-- 📦 Out of the box included dashboard with various customizable sorting and viewing options.
+- 📦 Dashboard with customizable sorting and viewing options.
 - 📱(Decent) mobile support.
 - 🕹 Supports both Minecraft Java Edition and Minecraft Bedrock Edition.
 
-### Community Showcase
-You can find a list of community hosted instances below. Want to be listed here? Add yourself in a pull request!
+### Installation
 
-* https://minetrack.me
-* https://bedrock.minetrack.me
-* https://suomimine.fi
-* https://minetrack.geyserconnect.net
-* https://minetrack.rmly.dev
-* https://minetrack.fi
-* https://pvp-factions.fr
-* https://stats.liste-serveurs.fr
-* https://minetrack.galaxite.dev
-* https://livemc.org
-* https://track.antralia.net
-* https://track.pacor.ro
-* https://minetrack.spielelp.de
-* https://track.axsoter.com
+1. Ensure you have Node 12.4.0+ installed (`node -v` to check your version).
+2. Configure your proxy pool in `proxylist.json`.
+3. Adjust `config.json` as needed.
+4. Add or remove servers in `servers.json`.
+5. Run `npm install` to install dependencies.
+6. Run `npm run build` to bundle assets.
+7. Start the application with `node main.js` (may need sudo).
 
-## Updates
-For updates and release notes, please read the [CHANGELOG](docs/CHANGELOG.md).
+### Docker
 
-**Migrating to Minetrack 5?** See the [migration guide](docs/MIGRATING.md).
+To build and deploy this fork with Docker:
 
-## Installation
-1. Node 12.4.0+ is required (you can check your version using `node -v`)
-2. Make sure everything is correct in ```config.json```.
-3. Add/remove servers by editing the ```servers.json``` file
-4. Run ```npm install```
-5. Run ```npm run build``` (this bundles `assets/` into `dist/`)
-6. Run ```node main.js``` to boot the system (may need sudo!)
-
-(There's also ```install.sh``` and ```start.sh```, but they may not work for your OS.)
-
-Database logging is disabled by default. You can enable it in ```config.json``` by setting ```logToDatabase``` to true.
-This requires sqlite3 drivers to be installed.
-
-## Docker
-Minetrack can be built and run with Docker from this repository in several ways:
-
-### Build and deploy directly with Docker
 ```
-# build image with name minetrack and tag latest
-docker build . --tag minetrack:latest
+# Build the image with the tag 'minetrack-proxy:latest'
+docker build . --tag minetrack-proxy:latest
 
-# start container, delete on exit
-# publish container port 8080 on host port 80
-docker run --rm --publish 80:8080 minetrack:latest
+# Start the container, delete on exit
+# Publish container port 8080 on host port 80
+docker run --rm --publish 80:8080 minetrack-proxy:latest
 ```
 
-The published port can be changed by modifying the parameter argument, e.g.:  
-* Publish to host port 8080: `--publish 8080:8080`  
-* Publish to localhost (thus prohibiting external access): `--publish 127.0.0.1:8080:8080`
+Or use `docker-compose`:
 
-### Build and deploy with docker-compose
 ```
-# build and start service
+# Build and start the service
 docker-compose up --build
 
-# stop service and remove artifacts
+# Stop service and remove artifacts
 docker-compose down
 ```
 
-## Nginx reverse proxy
-The following configuration enables Nginx to act as reverse proxy for a Minetrack instance that is available at port 8080 on localhost:
-```
-server {
-    server_name minetrack.example.net;
-    listen 80;
-    location / {
-        proxy_pass http://localhost:8080;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-    }
-}
-```
+### Notes
+
+- This fork is based on the original Minetrack project, with the primary addition being random proxy support.
+- For further details, refer to the original [Minetrack repository](https://github.com/Cryptkeeper/Minetrack).
